@@ -1,0 +1,105 @@
+/* Default Theme (Dark) */
+:root {
+    --background: #272932;
+    --text: #CB1DCD;
+    --gradient: linear-gradient(315deg, #FDF500 0%, #CB1DCD 94%);
+    --title: #FDF500;
+    --textTypeBox: #D1C5C0;
+    --stats: #00ff9f;
+    --fontFamily: "Tomorrow", sans-serif;
+    --textShadow: none;
+    --navbar-width: 256px;
+    --navbar-width-min: 80px;
+    --navbar-dark-primary: #18283b;
+    --navbar-dark-secondary: #2c3e50;
+    --navbar-light-primary: #f5f6fa;
+    --navbar-light-secondary: #8392a5;
+}
+
+
+/* Tokyo Night Theme */
+[data-theme="tokyoNight"] {
+    --background: #011628;
+    --text: #CBE0F0;
+    --gradient: linear-gradient(315deg, #F7971E 0%, #FFD200 94%);
+    --title: #ff9e64;
+    --textTypeBox: #547998;
+    --stats: #B4D0E9;
+    --fontFamily: sans-serif;
+    --textShadow: none;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --background: #121212;
+    --text: #FAFAFA;
+    --gradient: linear-gradient(315deg, #F7971E 0%, #FFD200 94%);
+    --title: #ffc107;
+    --textTypeBox: #706d6d;
+    --stats: #BB86FC;
+    --fontFamily: sans-serif;
+    --textShadow: none;
+}
+
+/* Cyber Theme */
+[data-theme="cyber"] {
+    --background: #272932;
+    --text: #CB1DCD;
+    --gradient: linear-gradient(315deg, #FDF500 0%, #CB1DCD 94%);
+    --title: #FDF500;
+    --textTypeBox: #D1C5C0;
+    --stats: #00ff9f;
+    --fontFamily: "Tomorrow", sans-serif;
+    --textShadow: none;
+}
+
+/* Steam Theme */
+[data-theme="steam"] {
+    --background: #6e2f3b;
+    --text: #fdd978;
+    --gradient: linear-gradient(315deg, #80acaa 0%, #fdd978 94%);
+    --title: #2b211e;
+    --textTypeBox: #605542;
+    --stats: #80acaa;
+    --fontFamily: "Tomorrow", sans-serif;
+    --textShadow: none;
+}
+
+/* Terminal Theme */
+[data-theme="terminal"] {
+    --background: #0D0208;
+    --text: #39ff14;
+    --gradient: linear-gradient(315deg, #39ff14 0%, #008F11 94%);
+    --title: #008F11;
+    --textTypeBox: #706d6d;
+    --stats: #39ff14;
+    --fontFamily: "Tomorrow", sans-serif;
+    --textShadow: none;
+}
+
+
+/* Araki Nobuyoshi Theme */
+[data-theme="arakiNobuyoshi"] {
+    --background: #232335;
+    --text: #086063;
+    --gradient: linear-gradient(90deg, #232335 0%, #0a4951 100%);
+    --title: #B42D2C;
+    --textTypeBox: #CCB1B0;
+    --stats: #1a5426;
+    --fontFamily: sans-serif;
+    --textShadow: none;
+}
+
+/* Hero Theme */
+[data-theme="hero"] {
+    --background: #440402;
+    --text: #3A3E47;
+    --gradient: linear-gradient(90deg, #70A960 0%, #76C9A5 100%);
+    --title: #B80100;
+    --textTypeBox: #CD6A5A;
+    --stats: #6A839D;
+    --fontFamily: sans-serif;
+    --textShadow: none;
+}
+
+

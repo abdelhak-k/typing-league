@@ -1,0 +1,77 @@
+.container{
+  background-color: #ccc;
+}
+
+.modal {
+    width: 88%;
+    height: 80%;
+    position: relative;
+    bottom: 25%;
+    background-color: #ccc;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+  
+  .themeSelector {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .searchIcon {
+    font-size: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .suggestions {
+    margin-top: 20px;
+  }
+
+  .close {
+    position: absolute; 
+    top: 10px;  
+    right: 10px;  
+    cursor: pointer; 
+  }
+  
+  .command {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s;
+  }
+  
+  
+  .icon {
+    margin-right: 10px;
+  }
+  
+  .themeBubbles {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+  
+  .themeBubble {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }

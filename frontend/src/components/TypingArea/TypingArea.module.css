@@ -1,0 +1,148 @@
+/* TypingArea.module.css */
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr; /* One column layout */
+  grid-template-rows: 300px 50px 100px; /* Auto height for header and footer, remaining space for app */
+  justify-items: center; /* Centers the content horizontally */
+  align-content: end;
+}
+.type-box {
+    display: block; /* Display as a block-level element */
+    width: 100%; /* Fixed width */
+    overflow: hidden; /* Hide overflow content */
+    margin: auto; /* Center the container horizontally */
+    background: var(--background, #fff); /* Background color using CSS variable with fallback */
+    color: var(--textTypeBox, #000); /* Text color using CSS variable with fallback */
+    position: relative; /* Position relative for absolutely positioned child elements */
+    transition: all 0.25s linear; /* Smooth transition for theme changes */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    z-index: 1;
+}
+
+/* 
+  Container for displaying the words that the user needs to type.
+  Manages the layout of words and handles scrolling behavior.
+*/
+.words {
+    color: var(--textTypeBox, #000); /* Text color using CSS variable with fallback */
+    font-size: 40px; /* Font size for the words */
+    line-height: 1.2; /* Consistent line height for accurate height calculations */
+    display: flex; /* Use flex layout for words */
+    flex-wrap: wrap; /* Allow words to wrap to the next line */
+    width: 100%; /* Full width of the parent container */
+    align-content: flex-start; /* Align wrapped lines to the top */
+    user-select: none; /* Prevent text selection */
+    overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
+    max-height: 180px;
+}
+
+/* 
+  Hide scrollbar for Chrome, Safari and Opera.
+  Provides a cleaner UI by removing visible scrollbars while maintaining scroll functionality.
+*/
+.words::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit browsers */
+}
+
+/* 
+  Styles for each individual word.
+  Handles spacing and word breaking to prevent overflow.
+*/
+.word {
+    margin: 5px 5px; /* Margin around each word */
+    display: flex; /* Use flex layout for characters within the word */
+}
+
+/* 
+  Styles for words that are typed incorrectly.
+  Adds a red underline to indicate errors.
+*/
+.errorWord {
+    border-bottom: 1px solid red; /* Red underline to mark incorrect words */
+}
+
+/* 
+  Styles for the current word that the user is typing.
+  Highlights the word with a light blue background and rounded corners.
+*/
+.currentWord {
+    background-color: rgba(0, 0, 255, 0.1); /* Light blue background for the current word */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* 
+  Styles for correctly typed characters.
+  Sets the text color to the defined CSS variable.
+*/
+.correctChar {
+    color: var(--text, #000); /* Correct character color using CSS variable with fallback */
+}
+
+/* 
+  Styles for incorrectly typed characters.
+  Sets the text color to red and adds a strike-through effect.
+*/
+.errorChar {
+    text-decoration: line-through; /* Strike-through to indicate error */
+    text-decoration-color: red;
+    color: var(--text, #000); /* Correct character color using CSS variable with fallback */
+
+}
+
+/* 
+  Styles for the hidden input field.
+  Positioned absolutely to cover the entire typing area and capture user input without being visible.
+*/
+.hidden-input {
+    opacity: 0; /* Fully transparent */
+    filter: alpha(opacity=0); /* For older IE browsers */
+    position: absolute; /* Absolute positioning within the parent container */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width of the parent container */
+    height: 100%; /* Full height of the parent container */
+    cursor: text; /* Change cursor to text to indicate input area */
+    outline: none; /* Remove default focus outline */
+    z-index: 1; /* Ensure it sits above other elements */
+}
+
+/* 
+  Styles for the statistics section displaying countdown and WPM.
+  Arranged using flex layout for proper alignment and spacing.
+*/
+.stats {
+    display: flex; /* Use flex layout for alignment */
+    justify-content: space-between; /* Distribute space evenly between child elements */
+    align-items: center; /* Vertically center the child elements */
+    width: 800px; /* Fixed width matching the parent container */
+    margin-top: 20px; /* Top margin for spacing from the words container */
+    color: var(--stats, #000); /* Text color using CSS variable with fallback */
+}
+
+/* 
+  Optional: Adjusts the styling of headings within the stats section.
+  Removes default margins and sets font size.
+*/
+.stats h3 {
+    margin: 0; /* Remove default margins */
+    font-size: 1.5rem; /* Set font size to 1.5 times the root font size */
+}
+
+.activeButton{
+  color: var(--text);
+}
+
+.inactiveButton{
+  color: var(--textTypeBox);
+}
+
+.options{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden{
+  display: none !important;
+}
