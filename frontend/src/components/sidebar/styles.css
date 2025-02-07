@@ -8,10 +8,6 @@ body {
   margin: 0;
 }
 
-.App {
-  font-family: sans-serif;
-  text-align: center;
-}
 
 .page {
   width: 100%;
@@ -70,8 +66,9 @@ body {
 }
 
 .sidebar--open {
-  width: 250px;
+  width: 220px;
   transition: width 0.3s ease;
+  background-color: var(--background);
 }
 
 .sidebar--open .sidebar-position span {

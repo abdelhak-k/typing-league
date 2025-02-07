@@ -1,23 +1,25 @@
 .container {
     display: grid;
-    grid-template-columns: 1fr; /* One column layout */
-    grid-template-rows: 0.5fr 2fr 0.5fr; /* Auto height for header and footer, remaining space for app */
-    height: 100vh; /* Full height of the viewport */
-    width: 80%; /* 80% of the viewport width */
-    margin: 0 auto; /* Center the container horizontally */
-}
-
-.header {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 2fr 0.5fr;
+    height: 100vh;
+    width: 80%;
+    margin: 0 auto;
+    }
+    .header {
     display: flex;
-    justify-content: space-between; /* Distribute items across the header */
-    align-items: center; /* Vertically align the content inside the header */
-    width: 100%; /* Full width of the container */
-    padding: 10px 20px; /* Reduced padding to control height */
-    box-sizing: border-box; /* Prevent padding from expanding the width */
-}
-
-.footer {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    }
+    .footer {
     display: flex;
-    justify-content: flex-start; /* Aligns footer content to the start of the flex container */
-    width: 100%; /* Ensures the footer takes up full width */
-}
+    justify-content: flex-start;
+    width: 100%;
+    }
+    .exhide{
+        color: var(--background);
+        background-color: var(--background);
+    }

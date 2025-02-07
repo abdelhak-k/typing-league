@@ -1,6 +1,6 @@
 .container {
     display: grid;
-    background-color: #f0f8ff;
+    background-color: var(--textTypeBox);
     grid-template-columns: 0.5fr 1fr 1fr;
     height: auto;
     justify-items: center;
@@ -9,6 +9,7 @@
     padding: 20px;
     margin: 0;
     border-radius: 8px;
+    color: var(--fontColor);
 }
 
 .ranking {
@@ -22,7 +23,7 @@
 
 /* Header styling (sticky within the container) */
 .ranking .header {
-    background-color: #f4f4f4;
+    color: white;
     text-align: center;
     font-weight: bold;
     font-size: 14px;
@@ -36,15 +37,19 @@
 .ranking th, .ranking td {
     padding: 12px;
     text-align: center;
-    border: 1px solid #ddd;
 }
 
 .ranking tr:nth-child(even) {
-    background-color: #ccc;
+    background-color: var(--gray-light);
+}
+
+
+.ranking tr:nth-child(odd) {
+    background-color: var(--black-dark);
 }
 
 .ranking th {
-    background-color: #f4f4f4;
+    background-color: var(--background);
 }
 
 /* Sticky icon wrapper (sticky within the container) */
@@ -73,6 +78,7 @@
     justify-items: center;
     align-items: center;
     margin-top: 20px;
+    color: black;
 }
 
 .leagues > div {
@@ -90,7 +96,6 @@
 .leagues select, .leagues input {
     padding: 10px;
     border-radius: 4px;
-    border: 1px solid #ccc;
     width: 100%;
     max-width: 250px;
     font-size: 14px;
@@ -102,10 +107,6 @@
     border-color: #007bff;
 }
 
-.leagues option:nth-child(even) {
-    background-color: #e3f2fd;
-}
-
 .leagues option {
     background-color: #fff;
     border-radius: 4px;
@@ -113,7 +114,7 @@
 
 .leagues button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--black-dark);
     color: white;
     border: none;
     border-radius: 4px;
@@ -123,5 +124,76 @@
 }
 
 .leagues button:hover {
-    background-color: #0056b3;
+    background-color: var(--gray-light);
+}
+
+/* Style the scrollbar for Chrome, Edge, Safari */
+.ranking {
+    display: grid;
+    align-items: start;
+    justify-items: center;
+    max-height: 580px;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin;  /* For Firefox */
+    scrollbar-color: var(--gray-light) var(--black-dark); /* Firefox */
+}
+
+/* Styling the scrollbar track (background of the scrollbar) */
+.ranking::-webkit-scrollbar {
+    width: 8px;  /* Set width of the scrollbar */
+}
+
+/* Styling the scrollbar track */
+.ranking::-webkit-scrollbar-track {
+    background-color: var(--black-dark);  /* Dark background for the scrollbar track */
+    border-radius: 10px;
+}
+
+/* Styling the scrollbar thumb (the draggable part of the scrollbar) */
+.ranking::-webkit-scrollbar-thumb {
+    background-color: var(--textTypeBox);  /* Light gray thumb color */
+    border-radius: 10px;
+}
+
+/* Styling the scrollbar when hovered */
+.ranking::-webkit-scrollbar-thumb:hover {
+    background-color: var(--stats);  /* Change color on hover (stats color) */
+}
+
+/* Styling the scrollbar for Firefox */
+.ranking {
+    scrollbar-width: thin; /* Narrow scrollbar */
+    scrollbar-color: var(--gray-light) var(--textTypeBox); /* Color for the thumb and track */
+}
+
+.copyHint {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.leagueCode {
+    cursor: pointer;
+    position: relative;
+    color: #666;
+    font-size: 0.9em;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.leagueCode:hover {
+    background-color: #f0f0f0;
+    color: #333;
 }

@@ -2,19 +2,30 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import styles from './TypingArea.module.css'; 
 import { ResetButton } from '../../utils/buttons';
-import { Tooltip, Box } from "@mui/material";
+import { Tooltip, Box, useForkRef } from "@mui/material";
 import Stats from '../stats/stats';
 import IconButton from '@mui/material/IconButton';
+import createTest from '../../scripts/createTest';
+import Fire from '../other/fire';
+const TypingArea = ({user, defaultText}) => {
 
-const TypingArea = (props) => {
-    const text = props.text;
-
+    const shuffleText = () => {
+        let ws = defaultText.split(" ");
+        ws = ws.sort(() => Math.random() - 0.5); // Shuffle words
+        return ws.join(" ");
+    };
+    
+    const [text, setShuffledText] = useState(shuffleText()); // Initial shuffle
+        /*
+    let max_wpm_15 = user?.max_wpm_15 || null;
+    let max_wpm_30 = user?.max_wpm_30 || null;
+    */
     const WORDS_COUNT = 300;
     const COUNT_DOWN_90 = 90;
     const COUNT_DOWN_60 = 60;
     const COUNT_DOWN_30 = 30;
     const COUNT_DOWN_15 = 15;
-
+    const wpmRef = useRef(0);
     const DEFAULT_DIFFICULTY = "Easy";
     const HARD_DIFFICULTY = "Hard";
 
@@ -54,6 +65,11 @@ const TypingArea = (props) => {
     // Ref to the countdown interval
     const intervalRef = useRef(null);
 
+    /*
+    const NewRecord = useRef(null);
+    const [currentRecordType, setCurrentRecordType] = useState(null);
+    */
+
     // Initialize words from the fetched text
     useEffect(() => {
         if (text) {
@@ -83,7 +99,8 @@ const TypingArea = (props) => {
 
     // Resets the game and marks it as finished
     const resetGame = () => {
-        setStatus('waiting'); 
+        setStatus('waiting');
+        setShuffledText(shuffleText()); 
         reset();
     };
     
@@ -118,8 +135,6 @@ const TypingArea = (props) => {
                 setCountDown((prev) => {
                     if (prev === 0) {
                         finishTest();
-                        clearInterval(intervalRef.current);
-                        return countDownConstant;
                     } else {
                         return prev - 1;
                     }
@@ -127,9 +142,30 @@ const TypingArea = (props) => {
             }, 1000); 
         }
     };
+
+    /*
+    useEffect(() => {
+        if (status !== 'started' || !max_wpm_15 || !max_wpm_30){
+            console.log(max_wpm_15);
+            console.log(max_wpm_30);    
+            return;
+        }
     
+        const currentMax = countDownConstant === COUNT_DOWN_15 ? max_wpm_15 :
+                          countDownConstant === COUNT_DOWN_30 ? max_wpm_30 :
+                          countDownConstant === COUNT_DOWN_60 ? 0 : 0;
+    
+        const isRecord = wpm > currentMax;
+        setIsNewRecord(isRecord);
+        setCurrentRecordType(countDownConstant);
+    }, [wpm, countDownConstant, status, max_wpm_15, max_wpm_30]); // add effects when the user breaks a new record  */ 
+
+
     // finishes the test, calculates WPM, and notifies App.jsx
-    const finishTest = () => {
+    const finishTest = async () => {
+        if(user){
+            await createTest(wpmRef.current ,countDownConstant);
+        }
         setStatus('finished');
     };
     
@@ -139,7 +175,7 @@ const TypingArea = (props) => {
         return targetWord.startsWith(typedWord);
     };
 
-    
+
     // calculates WPM and returns it
     const calculateWpm = () => {
         // Calculate the total number of characters in correctly typed words + spaces
@@ -162,6 +198,7 @@ const TypingArea = (props) => {
         const normalizedWpm = (adjustedTotalChars / 5) * (60 / countDownConstant);
 
         const calculatedWpm = Math.round(normalizedWpm);
+        wpmRef.current = calculatedWpm;
         return (calculatedWpm > 0 && isFinite(calculatedWpm)) ? calculatedWpm : 0;
     };
 
@@ -345,10 +382,36 @@ const TypingArea = (props) => {
     return (
         <div className={styles.container}>
             {status !== 'finished' ? (
-                <>
+                <>  
+                    <div>
+                    <div className={`${styles.options} ${status === 'started' ? styles.hidden : ""}`}>
+                        <IconButton onClick={() => setCountDownConstant(COUNT_DOWN_15)}>
+                        <span className={countDownConstant === COUNT_DOWN_15 ? styles.activeButton : styles.inactiveButton}>
+                            {COUNT_DOWN_15}</span>
+                        </IconButton>
+                        <IconButton onClick={() => setCountDownConstant(COUNT_DOWN_30)}>
+                            <span className={countDownConstant === COUNT_DOWN_30 ? styles.activeButton : styles.inactiveButton}>
+                                {COUNT_DOWN_30}
+                            </span>
+                        </IconButton>
+                        <IconButton onClick={() => setCountDownConstant(COUNT_DOWN_60)}>
+                            <span className={countDownConstant === COUNT_DOWN_60 ? styles.activeButton : styles.inactiveButton}>
+                                {COUNT_DOWN_60}
+                            </span>
+                        </IconButton>
+                        <IconButton onClick={() => setDifficulty(DEFAULT_DIFFICULTY)}>
+                            <span className={difficulty === DEFAULT_DIFFICULTY ? styles.activeButton : styles.inactiveButton}>
+                                {DEFAULT_DIFFICULTY}
+                            </span>
+                        </IconButton>    
+                    </div>
+                    {/*<div>
+                        <Fire />
+                    </div>*/}
 
+                    </div>
                     <div className={styles['type-box']}>
-                        <div className={styles.words}>
+                    <div className={styles.words}>
                             {words.length === 0 ? (
                                 <span>No text available to type</span>
                             ) : (
@@ -373,6 +436,7 @@ const TypingArea = (props) => {
                         </div>
                         <input
                             ref={textInputRef}
+                            autoComplete="off"
                             type="text"
                             id="textInput"
                             className={styles['hidden-input']}
@@ -392,38 +456,9 @@ const TypingArea = (props) => {
                             <span><ResetButton onClick={resetGame} aria-label="Restart Test"/></span>
                         </Tooltip>
                     </div>
-                    <div className={`${styles.options} ${status === 'started' ? styles.hidden : ""}`}>
-                        <div>
-                            <IconButton onClick={() => setCountDownConstant(COUNT_DOWN_15)}>
-                            <span className={countDownConstant === COUNT_DOWN_15 ? styles.activeButton : styles.inactiveButton}>
-                                {COUNT_DOWN_15}</span>
-                            </IconButton>
-                            <IconButton onClick={() => setCountDownConstant(COUNT_DOWN_30)}>
-                                <span className={countDownConstant === COUNT_DOWN_30 ? styles.activeButton : styles.inactiveButton}>
-                                    {COUNT_DOWN_30}
-                                </span>
-                            </IconButton>
-                            <IconButton onClick={() => setCountDownConstant(COUNT_DOWN_60)}>
-                                <span className={countDownConstant === COUNT_DOWN_60 ? styles.activeButton : styles.inactiveButton}>
-                                    {COUNT_DOWN_60}
-                                </span>
-                            </IconButton>
-                        </div>
-                        <div>
-                            <IconButton onClick={() => setDifficulty(DEFAULT_DIFFICULTY)}>
-                                <span className={difficulty === DEFAULT_DIFFICULTY ? styles.activeButton : styles.inactiveButton}>
-                                    {DEFAULT_DIFFICULTY}
-                                </span>
-                            </IconButton>    
-                            <IconButton onClick={() => setDifficulty(HARD_DIFFICULTY)}>
-                                <span className={difficulty === HARD_DIFFICULTY ? styles.activeButton : styles.inactiveButton}>
-                                    {HARD_DIFFICULTY}
-                                </span>
-                            </IconButton>  
-                        </div>
-                    </div>
+
                 </>
-            ) : <Stats wpm={wpm} onRestart={resetGame}/> }
+            ) : <Stats wpm={wpmRef.current} onRestart={resetGame} /> }
         </div>
     );
 

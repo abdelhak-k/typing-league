@@ -1,5 +1,5 @@
 .iconButton {
-    color: var(--stats) !important ; /* You can use CSS variables or regular values */
+    color: var(--stats) !important ;
     background-color: transparent;
     font-size: 16px;
 }

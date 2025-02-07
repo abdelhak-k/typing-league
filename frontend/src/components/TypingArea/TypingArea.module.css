@@ -3,19 +3,21 @@
 .container{
   display: grid;
   grid-template-columns: 1fr; /* One column layout */
-  grid-template-rows: 300px 50px 100px; /* Auto height for header and footer, remaining space for app */
+  grid-template-rows: 40px auto 40px;
   justify-items: center; /* Centers the content horizontally */
-  align-content: end;
+  align-content: center;
 }
 .type-box {
-    display: block; /* Display as a block-level element */
+    display: flex;
     width: 100%; /* Fixed width */
+    height: 300px;
     overflow: hidden; /* Hide overflow content */
-    margin: auto; /* Center the container horizontally */
+    align-items: center;
+    justify-content: center;
+
     background: var(--background, #fff); /* Background color using CSS variable with fallback */
     color: var(--textTypeBox, #000); /* Text color using CSS variable with fallback */
     position: relative; /* Position relative for absolutely positioned child elements */
-    transition: all 0.25s linear; /* Smooth transition for theme changes */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     z-index: 1;
 }
@@ -138,11 +140,18 @@
 }
 
 .options{
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .hidden{
   display: none !important;
+}
+
+.recordBadge {
+  color: #ffd700;
+  font-size: 0.9rem;
+  animation: badgePulse 1.5s ease-in-out infinite;
+  text-align: center;
 }

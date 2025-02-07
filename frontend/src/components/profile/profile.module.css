@@ -1,0 +1,91 @@
+
+.profilecontainer {
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  background-color: var(--profile);
+  color: var(--fontColor);
+  grid-template-columns: 1fr 1fr;
+  font-size: 1rem;
+  font-family: var(--fontFamily);
+  padding: 2rem;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  gap: 2rem;
+  transition: transform 0.3s ease-in-out;
+  }
+  .statCard:hover ,.profilecontainer:hover {
+  transform: translateY(-5px);
+  }
+  .avatarAndName {
+  display: flex;
+  align-items: center;
+  }
+  .avatarAndName img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  }
+  .user {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  }
+  .name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--title);
+  }
+  .typingStats {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  }
+  .typingStats p {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: var(--textTypeBox);
+  }
+  .statCard {
+  background-color: var(--profileCard);
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  }
+  .statCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--title);
+  }
+  .statCard p {
+  font-size: 1.25rem;
+  color: var(--textTypeBox);
+  margin-top: 0.5rem;
+  }
+  .statCard .wpm {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--stats);
+  }
+  .statCard .rank {
+  font-size: 1.1rem;
+  color: var(--gray-light);
+  margin-top: 1rem;
+  }
+  .cardContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  }
+  .cardContainer .statCard {
+  flex: 1;
+  min-width: 200px;
+  }
+  .cardsContainer {
+  display: grid;
+  gap: 40px;
+  }
