@@ -6,6 +6,9 @@ const createTest = async (score, duration) => {
         return response.data;
     } catch (error) {
         console.error('Error creating test:', error.response?.data);
+        Cookies.remove("access_token", { path: "/", domain: ".typingclub.tech" });
+        Cookies.remove("refresh_token", { path: "/", domain: ".typingclub.tech" });        
+        redirect("/login");
         throw error;
     }
 };

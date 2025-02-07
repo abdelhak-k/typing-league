@@ -89,3 +89,44 @@
   display: grid;
   gap: 40px;
   }
+  .changeUsernameSection {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.changeUsernameButton {
+    background-color: var(--profileCard);
+    color: var(--fontColor);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.changeUsernameButton:hover {
+    background-color: var(--profile);
+    transform: translateY(-3px);
+}
+.footer {
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%; 
+    color: var(--fontColor);
+    padding: 10px 20px; 
+}
+
+.footer a {
+    text-decoration: none;
+    color: inherit; 
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.footer a:hover {
+    color: var(--primaryColor);
+}

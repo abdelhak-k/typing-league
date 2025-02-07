@@ -15,7 +15,7 @@ const RedirectGoogleAuth = ({ setUser }) => {
             const refreshToken = Cookies.get("refresh_token");
             console.log(`accessToken: ${accessToken}`);
             console.log(`refreshToken: ${refreshToken}`);
-
+            
             const error = new URLSearchParams(window.location.search).get('error');
 
             if (error) {
@@ -35,6 +35,8 @@ const RedirectGoogleAuth = ({ setUser }) => {
                 }
             } else {
                 console.log('No tokens found in cookies');
+                Cookies.remove("access_token", { path: "/", domain: ".typingclub.tech" });
+                Cookies.remove("refresh_token", { path: "/", domain: ".typingclub.tech" });                
                 navigate('/login');
             }
         };

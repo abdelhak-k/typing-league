@@ -145,7 +145,7 @@ def google_login_callback(request):
                 value=access_token,
                 secure=True,
                 samesite='None',
-                httponly=True,
+                httponly=False,
                 domain=".typingclub.tech",
             )
             response.set_cookie(
@@ -153,7 +153,7 @@ def google_login_callback(request):
                 value=refresh_token,
                 secure=True,
                 samesite='None',
-                httponly=True,
+                httponly=False,
                 domain=".typingclub.tech",
             )
             return response        
@@ -165,7 +165,7 @@ def google_login_callback(request):
             value=access_token,
             secure=True,
             samesite='None',
-            httponly=True,
+            httponly=False,
             domain=".typingclub.tech",
         )
         response.set_cookie(
@@ -173,7 +173,7 @@ def google_login_callback(request):
             value=refresh_token,
             secure=True,
             samesite='None',
-            httponly=True,
+            httponly=False,
             domain=".typingclub.tech",
         )
         return response
@@ -242,12 +242,14 @@ class LeagueRankingView(APIView):
             return Response({'error': 'League not found'}, status=status.HTTP_404_NOT_FOUND)
         
 class Ranking15View(APIView):
+    permission_classes = [AllowAny]
     def get(self, request):
         profiles = Profile.objects.all().order_by('-max_wpm_15')[:15]
         serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
 
 class Ranking30View(APIView):
+    permission_classes = [AllowAny]
     def get(self, request):
         profiles = Profile.objects.all().order_by('-max_wpm_30')[:15]
         serializer = ProfileSerializer(profiles, many=True)

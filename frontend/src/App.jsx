@@ -10,6 +10,8 @@ import styles from './App.module.css';
 import Login from "./components/profile/login.jsx";
 import Logout from "./scripts/logout.jsx";
 import {useAuthentication} from './auth.js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const defaultText = "fast hands move over keys focus keeps speed high practice makes better always keep typing never stop learning small steps big progress stay calm stay smooth fingers glide easy keep flow steady mind clear eyes forward touch type right way build skill push limits reach goal stay sharp avoid rush stay relaxed keep going never quit train daily stay light move quick find rhythm stay loose type strong press soft trust hands aim true flow natural focus deep breathe steady keep balance tap fast work smart gain control feel smooth never force stay cool";
 
@@ -40,9 +42,10 @@ const App = () => {
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout logout={logout} />} />
                     </Routes>
-                    {/*in case adding a footer to the page*/ }
-                    <div className={styles.exhide}>
-                        footer
+                    <div className={styles.footer}>
+                        <a href="https://github.com/abdelhak-k/typing-league" target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faGithub} size="2x" /> GitHub Repository
+                        </a>
                     </div>
                 </div>
             </div>

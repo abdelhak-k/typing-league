@@ -14,12 +14,27 @@
     padding: 10px 20px;
     box-sizing: border-box;
     }
-    .footer {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    }
     .exhide{
         color: var(--background);
         background-color: var(--background);
     }
+    .footer {
+        display: flex;
+        justify-content: flex-start; 
+        width: 100%; 
+        color: var(--fontColor);
+        padding: 10px 20px; 
+    }
+    
+    .footer a {
+        text-decoration: none;
+        color: inherit; 
+        display: flex;
+        align-items: center;
+        gap: 8px; 
+    }
+    
+    .footer a:hover {
+        color: var(--primaryColor);
+    }
+    

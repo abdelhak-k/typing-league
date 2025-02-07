@@ -163,10 +163,10 @@ const TypingArea = ({user, defaultText}) => {
 
     // finishes the test, calculates WPM, and notifies App.jsx
     const finishTest = async () => {
+        setStatus('finished');
         if(user){
             await createTest(wpmRef.current ,countDownConstant);
         }
-        setStatus('finished');
     };
     
     const isCurrprogress = () => {

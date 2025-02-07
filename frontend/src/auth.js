@@ -86,9 +86,8 @@ export const useAuthentication = () => {
             }
         }
 
-        Cookies.remove("access_token");
-        Cookies.remove("refresh_token");
-        Cookies.remove("google_access_token");
+        Cookies.remove("access_token", { path: "/", domain: ".typingclub.tech" });
+        Cookies.remove("refresh_token", { path: "/", domain: ".typingclub.tech" });        
         setIsAuthorized(false);
         setUser(null);
     };

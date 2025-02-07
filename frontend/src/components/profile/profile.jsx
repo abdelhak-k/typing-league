@@ -5,7 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './profile.module.css';
 import { useAuthentication } from '../../auth';
 import { fetchUserData } from '../../scripts/fetchUser.js';
+import { useNavigate } from 'react-router-dom';
+
 const Profile = ({isAuthorized}) => {
+  const navigate = useNavigate();
+
     //const { isAuthorized, logout } = useAuthentication();
 /*
 
@@ -72,6 +76,15 @@ const Profile = ({isAuthorized}) => {
             <h3>Max WPM - 30s</h3>
             <div className={styles.wpm}>{user.max_wpm_30}</div>
           </div>
+        </div>
+      
+        <div className={styles.changeUsernameSection}>
+                        <button 
+                            className={styles.changeUsernameButton} 
+                            onClick={() => navigate('/set-username')}
+                        >
+                            Change Username here
+                        </button>
         </div>
         </div>
       ) : (
