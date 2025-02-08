@@ -12,6 +12,7 @@ const Ranking = () => {
     const [selectedLeague, setSelectedLeague] = useState(null);
     const [leagueRankings, setLeagueRankings] = useState({ 15: [], 30: [] });
     const [isLoading, setIsLoading] = useState(false);
+    const [isGlobalLoading, setIsGlobalLoading] = useState(false);
 
 
     // Add state for global rankings
