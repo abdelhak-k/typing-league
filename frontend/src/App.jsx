@@ -18,7 +18,14 @@ const defaultText = "fast hands move over keys focus keeps speed high practice m
 const App = () => {
 
     const { isAuthorized, user, logout } = useAuthentication(); 
-
+    // get the selected them
+    const savedTheme = sessionStorage.getItem('selectedTheme');
+    if (savedTheme) {
+    document.querySelector('body').setAttribute('data-theme', savedTheme);
+    }
+    else{
+        document.querySelector('body').setAttribute('data-theme', 'cyber');
+    }
     const[currUser, setCurrUser] = useState(null);
     useEffect(() => {
         setCurrUser(user);

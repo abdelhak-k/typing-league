@@ -14,11 +14,18 @@ const ThemeSelector = ({ isVisible }) => {
     getThemeNames().then(fetchedThemes => {
       setThemes(fetchedThemes);
     });
+
+    const savedTheme = sessionStorage.getItem('selectedTheme');
+    if (savedTheme) {
+      document.querySelector('body').setAttribute('data-theme', savedTheme);
+      setCurrentTheme(savedTheme);
+    }
   }, []);
 
   const setTheme = (theme) => {
     document.querySelector('body').setAttribute('data-theme', theme);
     setCurrentTheme(theme);
+    sessionStorage.setItem('selectedTheme', theme); // Store in session
   };
 
   const handleMouseEnter = (theme) => {
@@ -43,9 +50,9 @@ const ThemeSelector = ({ isVisible }) => {
               <div
                 key={index}
                 className={styles.command}
-                onClick={() => setTheme(theme)}  // set theme on click
-                onMouseEnter={() => handleMouseEnter(theme)}  // change on hover
-                onMouseLeave={handleMouseLeave}  // revert back
+                onClick={() => setTheme(theme)}  // Set theme on click
+                onMouseEnter={() => handleMouseEnter(theme)}  // Change on hover
+                onMouseLeave={handleMouseLeave}  // Revert back
                 style={{
                   backgroundColor: hoveredTheme === theme ? '#f4f4f4' : 'transparent',
                 }}
