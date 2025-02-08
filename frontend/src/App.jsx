@@ -13,7 +13,7 @@ import {useAuthentication} from './auth.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-const defaultText = "fast hands move over keys focus keeps speed high practice makes better always keep typing never stop learning small steps big progress stay calm stay smooth fingers glide easy keep flow steady mind clear eyes forward touch type right way build skill push limits reach goal stay sharp avoid rush stay relaxed keep going never quit train daily stay light move quick find rhythm stay loose type strong press soft trust hands aim true flow natural focus deep breathe steady keep balance tap fast work smart gain control feel smooth never force stay cool";
+const defaultText = btoa("fast hands move over keys focus keeps speed high practice makes better always keep typing never stop learning small steps big progress stay calm stay smooth fingers glide easy keep flow steady mind clear eyes forward touch type right way build skill push limits reach goal stay sharp avoid rush stay relaxed keep going never quit train daily stay light move quick find rhythm stay loose type strong press soft trust hands aim true flow natural focus deep breathe steady keep balance tap fast work smart gain control feel smooth never force stay cool");
 
 const App = () => {
     const DEFULTTheme= "cyber"; 

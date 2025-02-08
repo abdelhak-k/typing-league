@@ -9,18 +9,22 @@ import createTest from '../../scripts/createTest';
 import Fire from '../other/fire';
 const TypingArea = ({user, defaultText}) => {
 
-    const shuffleText = () => {
-        let ws = defaultText.split(" ");
-        ws = ws.sort(() => Math.random() - 0.5); // Shuffle words
-        return ws.join(" ");
-    };
-    
-    const [text, setShuffledText] = useState(shuffleText()); // Initial shuffle
         /*
     let max_wpm_15 = user?.max_wpm_15 || null;
     let max_wpm_30 = user?.max_wpm_30 || null;
     */
-    const WORDS_COUNT = 300;
+
+    useEffect(() => {
+        const detectDevTools = (event) => {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+            }
+        };
+        document.addEventListener("keydown", detectDevTools);
+        return () => document.removeEventListener("keydown", detectDevTools);
+    }, []);
+    
+    const WORDS_COUNT = 20;
     const COUNT_DOWN_90 = 90;
     const COUNT_DOWN_60 = 60;
     const COUNT_DOWN_30 = 30;
@@ -28,6 +32,16 @@ const TypingArea = ({user, defaultText}) => {
     const wpmRef = useRef(0);
     const DEFAULT_DIFFICULTY = "Easy";
     const HARD_DIFFICULTY = "Hard";
+
+    const shuffleText = () => {
+        const decodedText = atob(defaultText);
+        let ws = decodedText.split(/\s+/);
+        ws = ws.sort(() => Math.random() - 0.5); 
+        
+        return ws.slice(0, WORDS_COUNT).join(" "); 
+    };
+    
+    const [text, setShuffledText] = useState(shuffleText()); // Initial shuffle
 
     const DEFUALT_COUNT_DOWN = COUNT_DOWN_15;
 
@@ -40,7 +54,7 @@ const TypingArea = ({user, defaultText}) => {
     
 
     // useMemo for better optimization
-    const wordSpanRefs = useMemo(() => Array(WORDS_COUNT).fill(0).map(() => React.createRef()), [WORDS_COUNT]);
+    const [wordSpanRefs, setWordSpanRefs] = useState({});
 
     const [countDown, setCountDown] = useState(countDownConstant);
     const [status, setStatus] = useState('waiting');
@@ -81,14 +95,26 @@ const TypingArea = ({user, defaultText}) => {
     // Scroll to the current word
     useEffect(() => {
         if (
-            currWordIndex !== 0 &&
+            currWordIndex !== 0 && wordSpanRefs[currWordIndex] && wordSpanRefs[currWordIndex - 1] &&
             wordSpanRefs[currWordIndex].current.offsetLeft < wordSpanRefs[currWordIndex - 1].current.offsetLeft
         ) {
             wordSpanRefs[currWordIndex - 1].current.scrollIntoView({
                 behavior: 'smooth',
             }); 
+            const newWords = shuffleText().split(/\s+/);
+            setWords((prevWords) => [...prevWords, ...newWords]);
         } 
-    }, [currWordIndex, wordSpanRefs]);
+    }, [currWordIndex]);
+    
+    useEffect(() => {
+        const newRefs = {...wordSpanRefs};
+        words.forEach((_, index) => {
+            if (!newRefs[index]) {
+                newRefs[index] = React.createRef();
+            }
+        });
+        setWordSpanRefs(newRefs);
+    }, [words]);
 
     // Focus the hidden input on mount
     useEffect(() => {
@@ -442,6 +468,7 @@ const TypingArea = ({user, defaultText}) => {
                             className={styles['hidden-input']}
                             value={currInput} 
                             onKeyDown={handleKeyDown}
+                            onPaste={(e) => e.preventDefault()}
                             onChange={UpdateInput}
                             aria-label="Typing Input"
                             role="textbox"
