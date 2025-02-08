@@ -16,7 +16,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 const defaultText = "fast hands move over keys focus keeps speed high practice makes better always keep typing never stop learning small steps big progress stay calm stay smooth fingers glide easy keep flow steady mind clear eyes forward touch type right way build skill push limits reach goal stay sharp avoid rush stay relaxed keep going never quit train daily stay light move quick find rhythm stay loose type strong press soft trust hands aim true flow natural focus deep breathe steady keep balance tap fast work smart gain control feel smooth never force stay cool";
 
 const App = () => {
-
+    const DEFULTTheme= "cyber"; 
     const { isAuthorized, user, logout } = useAuthentication(); 
     // get the selected them
     const savedTheme = sessionStorage.getItem('selectedTheme');
@@ -24,7 +24,7 @@ const App = () => {
     document.querySelector('body').setAttribute('data-theme', savedTheme);
     }
     else{
-        document.querySelector('body').setAttribute('data-theme', 'cyber');
+        document.querySelector('body').setAttribute('data-theme', DEFULTTheme);
     }
     const[currUser, setCurrUser] = useState(null);
     useEffect(() => {
