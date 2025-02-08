@@ -20,22 +20,20 @@ const Ranking = () => {
 
     // Fetch user's leagues AND global rankings on mount
     useEffect(() => {
-        const fetchInitialData = async () => {
+        const fetchGlobalRankings = async () => {
+            setIsGlobalLoading(true);
             try {
-                // Fetch leagues
-                //const leaguesResponse = await api.get('/api/leagues/');
-                // setLeagues(leaguesResponse.data);
-                
-                // Fetch global rankings
                 const global15Response = await api.get('/api/ranking/15/');
                 const global30Response = await api.get('/api/ranking/30/');
                 setGlobalRankings15(global15Response.data);
                 setGlobalRankings30(global30Response.data);
             } catch (error) {
-                console.error('Error fetching initial data:', error);
+                console.error('Error fetching global rankings:', error);
+            } finally {
+                setIsGlobalLoading(false);
             }
         };
-        fetchInitialData();
+        fetchGlobalRankings();
     }, []);
 
     // Fetch user's leagues on mount
@@ -209,7 +207,7 @@ const Ranking = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                            {isLoading && selectedLeague ? (
+                            {(isLoading && selectedLeague)  || (isGlobalLoading && !selectedLeague) ? (
                                 <tr>
                                     <td colSpan={4} className={styles.loading}>
                                         Loading rankings...
