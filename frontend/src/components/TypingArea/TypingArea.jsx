@@ -221,10 +221,11 @@ const TypingArea = ({user, defaultText}) => {
         const numberOfCorrectWords = wordsCorrect.size;
         const adjustedTotalChars = numberOfCorrectWords > 0 ? totalChars - 1 : 0;
 
-        const normalizedWpm = (adjustedTotalChars / 5) * (60 / countDownConstant);
+        const normalizedWpm = (adjustedTotalChars / 5) * (60 / (countDownConstant - countDown));
 
         const calculatedWpm = Math.round(normalizedWpm);
         wpmRef.current = calculatedWpm;
+        console.log(calculatedWpm);
         return (calculatedWpm > 0 && isFinite(calculatedWpm)) ? calculatedWpm : 0;
     };
 
