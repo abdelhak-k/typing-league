@@ -169,6 +169,13 @@ const TypingArea = ({user, defaultText}) => {
         }
     };
 
+    useEffect(() =>{
+        if(countDown < countDownConstant){
+            const clWpm = calculateWpm();
+            setWpm(clWpm);
+        }
+    },[countDown]);
+
     /*
     useEffect(() => {
         if (status !== 'started' || !max_wpm_15 || !max_wpm_30){
@@ -235,8 +242,7 @@ const TypingArea = ({user, defaultText}) => {
             return;
         }
         
-        const calculatedWPM = calculateWpm();
-        setWpm(calculatedWPM);
+
 
         if (key.length === 1 && status === 'waiting') {
             start();
